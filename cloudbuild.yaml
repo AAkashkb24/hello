@@ -52,4 +52,4 @@ steps:
       - run
       - --image=gcr.io/$_PROJECT_ID/helloworld:$_TAG
       - --location=$_ZONE
-      - --cluster=$_CLUSTER_NAME
+      - --cluster=$_CLUSTER_NAME 
