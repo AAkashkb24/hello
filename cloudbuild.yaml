@@ -12,17 +12,17 @@ steps:
       - submit
       - '--region=us-central1'
       - >-
-        gcr.io/google-samples/hello-app:$_TAG
+        gcr.io/$_PROJECT_ID/helloworld:$_TAG
     id: Build-Docker-Image
   - name: gcr.io/cloud-builders/gcloud
     args:
       - '-c'
-      - gcloud container images describe gcr.io/google-samples/hello-app:$_TAG --format 'value(image_summary.digest)' > sha
+      - gcloud container images describe gcr.io/$_PROJECT_ID/helloworld:$_TAG --format 'value(image_summary.digest)' > sha
     entrypoint: bash
   - name: gcr.io/cloud-builders/gcloud
     args:
       - '-c'
-      - gcloud container binauthz create-signature-payload --artifact-url=gcr.io/google-samples/hello-app@$(awk 'NR==1{print $1}' sha) > ./generated_payload.json
+      - gcloud container binauthz create-signature-payload --artifact-url=gcr.io/$_PROJECT_ID/helloworld@$(awk 'NR==1{print $1}' sha) > ./generated_payload.json
     entrypoint: bash 
   - name: gcr.io/cloud-builders/gcloud
     args:
@@ -32,7 +32,7 @@ steps:
   - name: gcr.io/cloud-builders/gcloud
     args:
       - '-c'
-      - gcloud container binauthz attestations create --project="$_PROJECT_ID" --artifact-url="gcr.io/google-samples/hello-app@$(awk 'NR==1{print $1}' sha)" --attestor=projects/$_PROJECT_ID/attestors/"$_ATTESTOR_NAME" --signature-file=./ec_signature --public-key-id="$_PUBILC_KEY_ID" --validate
+      - gcloud container binauthz attestations create --project="$_PROJECT_ID" --artifact-url="gcr.io/$_PROJECT_ID/helloworld@$(awk 'NR==1{print $1}' sha)" --attestor=projects/$_PROJECT_ID/attestors/"$_ATTESTOR_NAME" --signature-file=./ec_signature --public-key-id="$_PUBILC_KEY_ID" --validate
     entrypoint: bash
   - name: gcr.io/cloud-builders/gcloud
     args:
@@ -44,6 +44,6 @@ steps:
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
-      - --image=gcr.io/google-samples/hello-app:$_TAG
+      - --image=gcr.io/$_PROJECT_ID/helloworld:$_TAG
       - --location=$_ZONE
       - --cluster=$_CLUSTER_NAME
