@@ -1,0 +1,10 @@
+name: projects/<PROJECT_ID>/policy
+admissionWhitelistPatterns:
+- namePattern: gcr.io/example-project/helloworld:my-tag
+- ...
+globalPolicyEvaluationMode: ENABLE
+clusterAdmissionRule:
+  evaluationMode: REQUIRE_ATTESTATION
+  enforcementMode: ENFORCED_BLOCK_AND_AUDIT_LOG
+  requireAttestationsBy:
+  - projects/stylishopdev/attestors/test-attestor  
