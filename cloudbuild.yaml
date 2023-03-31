@@ -11,7 +11,7 @@ steps:
       - builds
       - submit
       - '--region=us-central1'
-      - '--tag'
+      - '-t'
       - >-
         gcr.io/${PROJECT_ID}/helloworld:${TAG_NAME}
     id: Build-Docker-Image
