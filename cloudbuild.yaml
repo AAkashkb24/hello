@@ -11,7 +11,7 @@ steps:
       - builds
       - submit
       - '--region=us-central1'
-      - '--tag'
+      - '-t'
       - >-
         us-central1-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/test-image:$_TAG
     id: Build-Docker-Image
