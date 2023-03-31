@@ -13,7 +13,7 @@ steps:
       - '--region=us-central1'
       - '--tag'
       - >-
-        us-central1-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/test-image:$_TAG
+        gcr.io/google-samples/hello-app:$_TAG
     id: Build-Docker-Image
   - name: gcr.io/cloud-builders/gcloud
     args:
