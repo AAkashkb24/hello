@@ -9,14 +9,14 @@ steps:
   ### Build
   - id: 'build'
     name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/helloworld:$REVISION_ID', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/helloworld:$_TAG', '.']
     
     
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
     args: 
       - "-c"
-      - "gcloud container images describe 'gcr.io/$_PROJECT_ID/helloworld:$_REVISION_ID' '--format' 'value(image_summary.digest)' > sha"
+      - "gcloud container images describe 'gcr.io/$_PROJECT_ID/helloworld:$_TAG' '--format' 'value(image_summary.digest)' > sha"
      
     
   - name: gcr.io/cloud-builders/gcloud
