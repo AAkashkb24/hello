@@ -15,40 +15,40 @@ steps:
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
     args: 
-      - -c
-      - 'gcloud container images describe 'gcr.io/$_PROJECT_ID/helloworld:$_TAG' '--format' 'value(image_summary.digest)' > sha'
+    - -c
+    - 'gcloud container images describe 'gcr.io/$_PROJECT_ID/helloworld:$_TAG' '--format' 'value(image_summary.digest)' > sha'
      
     
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
     args: 
-      - '-c'
-      - 'gcloud container binauthz create-signature-payload --artifact-url=gcr.io/$_PROJECT_ID/helloworld@$(awk 'NR==1{print $1}' sha) > ./generated_payload.json'
+    - '-c'
+    - 'gcloud container binauthz create-signature-payload --artifact-url=gcr.io/$_PROJECT_ID/helloworld@$(awk 'NR==1{print $1}' sha) > ./generated_payload.json'
        
     
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
     args: 
-     - '-c'
-     - 'openssl dgst -sha256 -sign ./ec_private.pem ./generated_payload.json > ./ec_signature'
+    - '-c'
+    - 'openssl dgst -sha256 -sign ./ec_private.pem ./generated_payload.json > ./ec_signature'
     
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
     args: 
-      - '-c'
-      - 'gcloud container binauthz attestations create --project="$_PROJECT_ID" --artifact-url="gcr.io/$_PROJECT_ID/helloworld@$(awk 'NR==1{print $1}' sha)" --attestor=projects/$_PROJECT_ID/attestors/"$_ATTESTOR_NAME" --signature-file=./ec_signature --public-key-id="$_PUBILC_KEY_ID" --validate'
+    - '-c'
+    - 'gcloud container binauthz attestations create --project="$_PROJECT_ID" --artifact-url="gcr.io/$_PROJECT_ID/helloworld@$(awk 'NR==1{print $1}' sha)" --attestor=projects/$_PROJECT_ID/attestors/"$_ATTESTOR_NAME" --signature-file=./ec_signature --public-key-id="$_PUBILC_KEY_ID" --validate'
     
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
     args: 
-      - '-c'
-      - >-
+    - '-c'
+    - >-
         'gcloud container clusters get-credentials "$_CLUSTER_NAME" --zone'
         "$_ZONE" --project "$_PROJECT_ID"
     
   - name: "gcr.io/cloud-builders/gke-deploy"
     args: 
-      - run
-      - --image=gcr.io/$_PROJECT_ID/helloworld:$_TAG
-      - --location=$_ZONE
-      - --cluster=$_CLUSTER_NAME
+    - run
+    - --image=gcr.io/$_PROJECT_ID/helloworld:$_TAG
+    - --location=$_ZONE
+    - --cluster=$_CLUSTER_NAME
