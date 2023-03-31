@@ -35,7 +35,7 @@ steps:
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
     args: 
-      - "-c"
+      - '-c'
       - 'gcloud container binauthz attestations create --project="$_PROJECT_ID" --artifact-url="gcr.io/$_PROJECT_ID/helloworld@$(awk 'NR==1{print $1}' sha)" --attestor=projects/$_PROJECT_ID/attestors/"$_ATTESTOR_NAME" --signature-file=./ec_signature --public-key-id="$_PUBILC_KEY_ID" --validate'
     
   - name: gcr.io/cloud-builders/gcloud
