@@ -6,8 +6,8 @@ steps:
         gcloud container clusters get-credentials "$_CLUSTER_NAME" --zone
         "us-central1" --project "$_PROJECT_ID"
     entrypoint: bash
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: 'Build-Docker-Image'
+  - id: 'Build-Docker-Image'
+    name: 'gcr.io/cloud-builders/gcloud'
     args: ['build', '-t', "gcr.io/${PROJECT_ID}/helloworld:${TAG_NAME"}
     
   - name: gcr.io/cloud-builders/gcloud
