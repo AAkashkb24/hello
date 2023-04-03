@@ -28,7 +28,7 @@ steps:
       - '--attestor'
       - 'projects/${PROJECT_ID}/attestors/$_ATTESTOR_NAME'
       - '--keyversion'
-      - 'projects/${PROJECT_ID}/locations/${KMS_KEY_LOCATION}/keyRings/${KMS_KEYRING_NAME}/cryptoKeys/${KMS_KEY_NAME}/cryptoKeyVersions/${KMS_KEY_VERSION}'
+      - 'projects/${PROJECT_ID}/locations/$_KMS_KEY_LOCATION/keyRings/$_KMS_KEYRING_NAME/cryptoKeys/$_KMS_KEY_NAME/cryptoKeyVersions/$_KMS_KEY_VERSION'
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
     args: 
