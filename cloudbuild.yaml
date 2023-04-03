@@ -21,14 +21,14 @@ steps:
     
   
   - id: 'create-attestation'
-    name: 'gcr.io/cloud-builders/gcloud'
+    name: 'gcr.io/$PROJECT_ID/helloworld:latest'
     args:
       - '--artifact-url'
       - 'gcr.io/${PROJECT_ID}/helloworld:latest'
       - '--attestor'
-      - 'projects/${PROJECT_ID}/attestors/ATTESTOR_NAME'
+      - 'projects/${PROJECT_ID}/attestors/${ATTESTOR_NAME}'
       - '--keyversion'
-      - 'projects/${PROJECT_ID}/locations/KMS_KEY_LOCATION/keyRings/KMS_KEYRING_NAME/cryptoKeys/KMS_KEY_NAME/cryptoKeyVersions/KMS_KEY_VERSION'
+      - 'projects/${PROJECT_ID}/locations/${KMS_KEY_LOCATION}/keyRings/${KMS_KEYRING_NAME}/cryptoKeys/${KMS_KEY_NAME}/cryptoKeyVersions/${KMS_KEY_VERSION}'
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
     args: 
