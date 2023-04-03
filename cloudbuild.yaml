@@ -33,7 +33,7 @@ steps:
     args:
       - "-c"
       - |
-        PRIVATE_KEY_FILE='./ec_private.pem'
+        PRIVATE_KEY_FILE="./ec_private.pem"
         openssl ecparam -genkey -name prime256v1 -noout -out ${PRIVATE_KEY_FILE}
         openssl dgst -sha256 -sign ./ec_private.pem ./generated_payload.json > ./ec_signature'
 
