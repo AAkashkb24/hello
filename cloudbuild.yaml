@@ -20,31 +20,15 @@ steps:
      
     
   
-  - name: gcr.io/cloud-builders/gcloud	
-    entrypoint: 'bash'
+  - id: 'create-attestation'
+    name: 'gcr.io/${PROJECT_ID}/binauthz-attestation:latest'
     args:
-      - "-c"
-      - "gcloud container binauthz create-signature-payload --artifact-url=gcr.io/$_PROJECT_ID/helloworld@$(awk 'NR==1{print $1}' sha) > ./generated_payload.json"
-      - '-cat ./generated_payload.json'
-
-    
-  - name: 'ubuntu'
-    entrypoint: 'bash'
-    env:
-      - 'PRIVATE_KEY_FILE=./ec_private.pem'
-    args:
-      - '-c'
-      - |
-        openssl ecparam -genkey -name prime256v1 -noout -out ${PRIVATE_KEY_FILE}
-        openssl dgst -sha256 -sign ${PRIVATE_KEY_FILE} ./generated_payload.json > ./ec_signature
-
-  - name: gcr.io/cloud-builders/gcloud
-    entrypoint: 'bash'
-    args: 
-      - -c
-      -  |
-         gcloud container binauthz attestations create --project='"$_PROJECT_ID"' --artifact-url='"gcr.io/$_PROJECT_ID/helloworld@$(awk ''NR==1{print $1}'' sha)"' --attestor='"projects/$_PROJECT_ID/attestors/"$_ATTESTOR_NAME"' --signature-file=./ec_signature --public-key-id='"$_PUBILC_KEY_ID"' --validate
-    
+      - '--artifact-url'
+      - 'gcr.io/${PROJECT_ID}/helloworld:latest'
+      - '--attestor'
+      - 'projects/${PROJECT_ID}/attestors/ATTESTOR_NAME'
+      - '--keyversion'
+      - 'projects/${PROJECT_ID}/locations/KMS_KEY_LOCATION/keyRings/KMS_KEYRING_NAME/cryptoKeys/KMS_KEY_NAME/cryptoKeyVersions/KMS_KEY_VERSION'
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
     args: 
