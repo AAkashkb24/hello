@@ -1,0 +1,7 @@
+gcloud container binauthz attestations create \
+    --project="${PROJECT_ID}" \
+    --artifact-url="${IMAGE_TO_ATTEST}" \
+    --attestor="projects/${PROJECT_ID}/attestors/${ATTESTOR_NAME}" \
+    --signature-file=/tmp/ec_signature \
+    --public-key-id="${PUBLIC_KEY_ID}" \
+    --validate
