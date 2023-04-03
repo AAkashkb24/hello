@@ -28,14 +28,15 @@ steps:
       - '-cat ./generated_payload.json'
 
     
-  - name: gcr.io/cloud-builders/gcloud	
+  - name: 'ubuntu'
     entrypoint: 'bash'
+    env:
+      - 'PRIVATE_KEY_FILE=./ec_private.pem'
     args:
-      - "-c"
+      - '-c'
       - |
-        PRIVATE_KEY_FILE="./ec_private.pem"
         openssl ecparam -genkey -name prime256v1 -noout -out ${PRIVATE_KEY_FILE}
-        openssl dgst -sha256 -sign ./ec_private.pem ./generated_payload.json > ./ec_signature'
+        openssl dgst -sha256 -sign ${PRIVATE_KEY_FILE} ./generated_payload.json > ./ec_signature
 
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: 'bash'
