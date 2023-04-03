@@ -24,7 +24,7 @@ steps:
     args: 
       - "-c"
       - "gcloud container binauthz create-signature-payload --artifact-url=gcr.io/$_PROJECT_ID/helloworld@$(awk 'NR==1{print $1}' sha) > ./generated_payload.json"
-      - "cat", "generated_payload.json"
+      - 'cat', 'generated_payload.json'
        
     
   - name: gcr.io/cloud-builders/gcloud
