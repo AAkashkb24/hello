@@ -1,0 +1,8 @@
+{
+  "name": "projects/stylishopdev/notes/test-attestor-note2",
+  "attestation": {
+    "hint": {
+      "human_readable_name": "Attestor Note"
+    }
+  }
+}
