@@ -19,13 +19,7 @@ steps:
       - "gcloud container images describe 'gcr.io/$_PROJECT_ID/helloworld' '--format' 'value(image_summary.digest)' > sha"
      
     
-  - name: 'ubuntu'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        apt-get update && apt-get install -y openssl
-        openssl version
+  
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
