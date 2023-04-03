@@ -1,0 +1,3 @@
+gcloud container binauthz attestors create ${_ATTESTOR_NAME} \
+--attestation-authority-note=${_NOTE_ID} \
+--attestation-authority-note-project=${PROJECT_ID}
