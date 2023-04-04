@@ -7,15 +7,9 @@ steps:
         "$_ZONE" --project "$_PROJECT_ID"
     entrypoint: bash
   ### Build
-  - name: gcr.io/cloud-builders/gcloud
-    id: Build-Docker-Image
-    args:
-      - builds
-      - submit
-      - '--region=us-central1'
-      - '--tag'
-      - >-
-        us-central1-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/helloworld:$_TAG
+  - id: 'build'
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/helloworld', '.']
     
   
     
