@@ -11,8 +11,8 @@ steps:
   - id: 'build-docker-image'
     name: 'gcr.io/cloud-builders/gcloud'
     args:
-      - builds
-      - submit
+      - '--builds'
+      - '--submit'
       - '--region=us-central1'
       - '--tag'
       - >-
