@@ -23,7 +23,7 @@ steps:
     
   
   - id: 'create-attestation'
-    name: 'gcr.io/cloud-builders/docker'
+    name: 'gcr.io/$PROJECT_ID/binauthz-attestation:latest'
     args:
       - '--artifact-url'
       - 'gcr.io/${PROJECT_ID}/helloworld'
