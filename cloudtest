@@ -11,18 +11,7 @@ steps:
     name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/helloworld', '.']
     
-  - id: 'binary-attest'
-    name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'build'
-      - '-t'
-      - 'gcr.io/$PROJECT_ID/binauthz-attestation:latest'
-      
-  - id: 'publish'
-    name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'push'
-      - 'gcr.io/$PROJECT_ID/binauthz-attestation:latest'
+  
     
     
   - name: gcr.io/cloud-builders/gcloud
