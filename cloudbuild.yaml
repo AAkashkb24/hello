@@ -15,7 +15,8 @@ steps:
       - submit
       - '--region=us-central1'
       - '--tag'
-      - 'us-central1-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/test-image:$_TAG'
+      - >-
+        us-central1-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/test-image:$_TAG
 
   - id: 'create-attestation'
     name: 'gcr.io/$PROJECT_ID/binauthz-attestation:latest'
