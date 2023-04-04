@@ -21,7 +21,7 @@ steps:
     
   
   - id: 'create-attestation'
-    name: 'gcr.io/cloud-builders/gcloud'
+    name: 'gcr.io/cloud-builders/docker'
     args:
       - '--artifact-url'
       - 'gcr.io/${PROJECT_ID}/helloworld'
