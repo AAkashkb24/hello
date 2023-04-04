@@ -14,8 +14,6 @@ steps:
   - id: 'attest'
     name: 'gcr.io/$PROJECT_ID/binauthz-attestation:latest'
     args:
-      - '--artifact-url'
-      - 'gcr.io/$PROJECT_ID/helloworld:latest'
       - '--attestor'
       - 'projects/$PROJECT_ID/attestors/my-cloudbuildkey'
       - '--keyversion'
