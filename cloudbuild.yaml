@@ -18,7 +18,7 @@ steps:
     entrypoint: 'bash'
     args: 
       - "-c"
-      - "gcloud container images describe 'gcr.io/$_PROJECT_ID/helloworld:$_TAG' '--format' 'value(image_summary.digest)' > sha"
+      - "gcloud container images describe 'gcr.io/$_PROJECT_ID/helloworld' '--format' 'value(image_summary.digest)' > sha"
      
     
   
