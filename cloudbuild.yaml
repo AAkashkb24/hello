@@ -17,7 +17,7 @@ steps:
       - '--artifact-url'
       - 'gcr.io/$PROJECT_ID/helloworld:latest'
       - '--attestor'
-      - 'projects/$PROJECT_ID/attestors/$ATTESTOR_NAME'
+      - 'projects/$PROJECT_ID/attestors/my-cloudbuildkey'
       - '--keyversion'
-      - 'projects/$PROJECT_ID/locations/${KMS_KEY_LOCATION}/keyRings/${KMS_KEYRING_NAME}/cryptoKeys/${KMS_KEY_NAME}/cryptoKeyVersions/${KMS_KEY_VERSION}'
+      - 'projects/$PROJECT_ID/locations/global/keyRings/my-cloudbuildkey/cryptoKeys/my-cloudbuildkey/cryptoKeyVersions/1'
 tags: ['cloud-builders-community']
