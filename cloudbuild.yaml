@@ -23,6 +23,8 @@ steps:
     args:
       - '--attestor'
       - 'projects/${PROJECT_ID}/attestors/$_ATTESTOR_NAME'
+      - '--artifact-url'
+      - 'gcr.io/${PROJECT_ID}/helloworld:$_TAG'
       - '--keyversion'
       - 'projects/${PROJECT_ID}/locations/$_KMS_KEY_LOCATION/keyRings/$_KMS_KEYRING_NAME/cryptoKeys/$_KMS_KEY_NAME/cryptoKeyVersions/$_KMS_KEY_VERSION'
       - '--artifact-url'
