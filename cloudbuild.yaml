@@ -16,7 +16,7 @@ steps:
       - '--region=us-central1'
       - '--tag'
       - >-
-        'us-central1-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/helloworld:$_TAG'
+        'us-central1-docker.pkg.dev/$_PROJECT_ID/helloworld:$_TAG'
 
   - id: 'create-attestation'
     name: 'gcr.io/$PROJECT_ID/binauthz-attestation:latest'
@@ -31,12 +31,12 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - '-c'
-      - gcloud container images describe us-central1-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/helloworld:$_TAG --format 'value(image_summary.digest)' > sha
+      - gcloud container images describe us-central1-docker.pkg.dev/$_PROJECT_ID/helloworld:$_TAG --format 'value(image_summary.digest)' > sha
     entrypoint: bash
 
   - name: 'gcr.io/cloud-builders/gke-deploy'
     args: 
       - run
-      - --image=gcr.io/$_PROJECT_ID/$_REPO_NAME/helloworld:$_TAG
+      - --image=gcr.io/$_PROJECT_ID/helloworld:$_TAG
       - --location=$_ZONE
       - --cluster=$_CLUSTER_NAME
