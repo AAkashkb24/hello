@@ -15,9 +15,9 @@ steps:
     name: 'gcr.io/$PROJECT_ID/binauthz-attestation:latest'
     args:
       - '--attestor'
-      - 'projects/$PROJECT_ID/attestors/my-cloudbuildkey'
+      - 'projects/$PROJECT_ID/attestors/ATTESTOR_NAME'
       - '--artifact-url'
       - 'gcr.io/$PROJECT_ID/helloworld:latest'
       - '--keyversion'
-      - 'projects/$PROJECT_ID/locations/global/keyRings/my-cloudbuildkey/cryptoKeys/my-cloudbuildkey/cryptoKeyVersions/1'
+      - 'projects/$PROJECT_ID/locations/KMS_KEY_LOCATION/keyRings/KMS_KEYRING_NAME/cryptoKeys/KMS_KEY_NAME/cryptoKeyVersions/KMS_KEY_VERSION'
 tags: ['cloud-builders-community']
