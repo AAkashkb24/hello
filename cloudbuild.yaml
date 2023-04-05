@@ -15,7 +15,7 @@ steps:
     name: 'gcr.io/$PROJECT_ID/binauthz-attestation:latest'
     args:
       - '--attestor'
-      - 'projects/$PROJECT_ID/attestors/${ATTESTOR_NAME}'
+      - 'projects/$PROJECT_ID/attestors/ATTESTOR_NAME'
       - '--artifact-url'
       - 'gcr.io/$PROJECT_ID/helloworld:latest'
       - '--keyversion'
