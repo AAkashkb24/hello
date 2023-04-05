@@ -19,5 +19,5 @@ steps:
       - '--artifact-url'
       - 'gcr.io/$PROJECT_ID/helloworld:latest'
       - '--keyversion'
-      - 'projects/$PROJECT_ID/locations/KMS_KEY_LOCATION/keyRings/KMS_KEYRING_NAME/cryptoKeys/KMS_KEY_NAME/cryptoKeyVersions/KMS_KEY_VERSION'
+      - 'projects/$PROJECT_ID/locations/$KMS_KEY_LOCATION/keyRings/$KMS_KEYRING_NAME/cryptoKeys/$KMS_KEY_NAME/cryptoKeyVersions/$KMS_KEY_VERSION'
 tags: ['cloud-builders-community']
