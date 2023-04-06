@@ -1,0 +1,25 @@
+apiVersion: cloud-build-notifiers/v1
+kind: SMTPNotifier
+metadata:
+  name: example-smtp-notifier
+spec:
+  notification:
+    filter: build.status == Build.Status.SUCCESS
+    params:
+      buildStatus: $(build.status)
+    delivery:
+      server: server-host-name
+      port: "port"
+      sender: sender-email
+      from: from-email
+      recipients:
+        - recipient-email
+        # optional: more emails here
+      password:
+        secretRef: smtp-password
+    template:
+      type: golang
+      uri: gs:example-gcs-bucket/smtp.html
+  secrets:
+  - name: smtp-password
+    value: projects/project-id/secrets/secret-name/versions/latest
